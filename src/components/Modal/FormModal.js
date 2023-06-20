@@ -10,14 +10,18 @@ import navIcon3 from '../../assets/img/nav-icon3.svg'
 export const FormModal = () => {
     const [stateLogin, setStateLogin] = useState({ userName: null, password: null });
     const [loginResponse, setLoginResponse] = useState(null);
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const handleLogin = (e) => {
         e.preventDefault();
-
+        
         LoginService.login(stateLogin.userName, stateLogin.password)
             .then((res) => {
                 console.log(res);
                 localStorage.setItem('isLogin', true);
+                handleClose();
                 // window.location.href('/');
             })
             .catch((err) => {
@@ -66,7 +70,12 @@ export const FormModal = () => {
                         
                         <>Login Success</>
                     ) : (
-                            <button className="loginButton" onClick={(e) => handleLogin(e)}>LOGIN</button>
+                            <button className="loginButton"  
+                            onClick={(e) => {
+                                handleLogin(e);
+                              }}
+                            //onClick={(e) => handleLogin(e)}
+                            >LOGIN</button>
                         )}
                     <h5>Don't have an account <a href="#">Register?</a></h5>
                 </form>

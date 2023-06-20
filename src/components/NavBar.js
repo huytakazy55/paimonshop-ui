@@ -30,6 +30,11 @@ export const NavBar = () => {
         }
     }, [])
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
     const closeModal = () => {
         setModalOpen(false);
     };
@@ -81,21 +86,21 @@ export const NavBar = () => {
                     <a href="#"><img src={navIcon2} alt="" /></a>
                     <a href="#"><img src={navIcon3} alt="" /></a>
                 </div>
-                {isLogin==='true' ? (<>{user} <button onClick={logout}>Logout</button></>) : (<motion.button 
+                {/* {isLogin==='true' ? (<>{user} <button onClick={logout}>Logout</button></>) : (<motion.button 
                     whileTap={{scale: 0. }}
                     className="save-button">
                     <Link to='/Login' className={activeLink === 'login' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('login')}>
                         LOGIN 
                     </Link>
                 </motion.button>)}
-                {modalOpen && <Modal modalOpen={modalOpen} handleClose={closeModal} />}  
-                {/* <motion.button 
+                {modalOpen && <Modal modalOpen={modalOpen} handleClose={closeModal} />}   */}
+                {isLogin==='true' ? (<>{user} <button onClick={logout}>Logout</button></>) : (<motion.button
                     whileTap={{scale: 0. }}
-                    className="save-button">
-                    <Link to='/Login' className={activeLink === 'login' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('login')}>
-                        Login
-                    </Link>
-                </motion.button> */}
+                    className="save-button"
+                     onClick={() => (modalOpen ? closeModal() : open())}>
+                    LOGIN
+                </motion.button>)}
+                {modalOpen && <Modal modalOpen={modalOpen} handleClose={closeModal} />}
             </span>
             </Navbar.Collapse>
         {/* </Container> */}
